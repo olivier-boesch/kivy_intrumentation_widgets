@@ -4,23 +4,23 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import NumericProperty, StringProperty
 from kivy.clock import Clock
-from kivy.uix.button import Button
+from flatbutton import FlatButton
 from datetime import timedelta
 
 # Définition de l'interface graphique du widget
 KV = '''
 <CircularTimer>:
     canvas.before:
-        # Cercle d'arrière-plan (gris)
+        # Cercle d'arrière-plan (décor)
         Color:
-            rgba: 0.2, 0.2, 0.2, 1
+            rgba: 0.2, 0.6, 0.8, 0.2
         Line:
             circle: (self.width / 2, self.height / 2, min(self.width, self.height) / 2 - dp(15), 0, 360)
             width: dp(8)
             
         # Cercle de progression dynamique (bleu)
         Color:
-            rgba: (0.1, 0.6, 0.8, 1) if root.angle > 0 else (0, 0, 0, 0)  # Affiche uniquement si l'angle est supérieur à 0
+            rgba: (0.2, 0.6, 0.8, 1) if root.angle > 0 else (0, 0, 0, 0)
         Line:
             circle: (self.width / 2, self.height / 2, min(self.width, self.height) / 2 - dp(15), 0, root.angle)
             width: dp(8)
@@ -104,10 +104,10 @@ class TestApp(App):
 
         # Boutons de contrôle
         controls = BoxLayout(size_hint=(1, 0.3), spacing=10)
-        btn_start = Button(text="Start (1 min)", on_press=lambda x: self.timer.start(timedelta(minutes=1)))
-        btn_resume = Button(text="Resume", on_press=lambda x: self.timer.start())
-        btn_pause = Button(text="Pause", on_press=lambda x: self.timer.pause())
-        btn_stop = Button(text="Stop", on_press=lambda x: self.timer.stop())
+        btn_start = FlatButton(text="Start (1 min)", on_press=lambda x: self.timer.start(timedelta(minutes=1)))
+        btn_resume = FlatButton(text="Resume", on_press=lambda x: self.timer.start())
+        btn_pause = FlatButton(text="Pause", on_press=lambda x: self.timer.pause())
+        btn_stop = FlatButton(text="Stop", on_press=lambda x: self.timer.stop())
         
         controls.add_widget(btn_start)
         controls.add_widget(btn_resume)

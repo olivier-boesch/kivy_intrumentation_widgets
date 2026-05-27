@@ -46,7 +46,7 @@ Builder.load_string('''
         Label:
             text: root.unit_text
             font_size: min(root.size) * 0.1
-            color: 0.7, 0.7, 0.7, 1
+            color: 1, 1, 1, 1
             size_hint: 1, None
             height: self.texture_size[1]
             halign: 'center'
@@ -54,7 +54,7 @@ Builder.load_string('''
         Label:
             text: root.mean_text
             font_size: min(root.size) * 0.05
-            color: 0.1, 0.6, 0.8, 1
+            color: 0.2, 0.6, 0.8, 1
             size_hint: 1, None
             height: self.texture_size[1] + dp(5)
             halign: 'center'
@@ -62,7 +62,7 @@ Builder.load_string('''
         Label:
             text: "window: " + str(root.window_size_n)
             font_size: min(root.size) * 0.05
-            color: 0.1, 0.6, 0.8, 1
+            color: 0.2, 0.6, 0.8, 1
             size_hint: 1, None
             height: self.texture_size[1] + dp(5)
             halign: 'center'
@@ -135,9 +135,9 @@ class CircularGauge(RelativeLayout):
 
         # Instructions canvas créées une fois, mises à jour in-place ensuite
         with self.canvas.before:
-            Color(0.2, 0.2, 0.2, 1)
+            Color(0.2, 0.6, 0.8, 0.2)
             self._bg_arc = Line(width=dp(8), cap='none')
-            Color(0.1, 0.6, 0.8, 1)
+            Color(0.2, 0.6, 0.8, 1)
             self._fg_arc = Line(width=dp(8), cap='none')
         with self.canvas:
             Color(1, 1, 1, 1)
@@ -237,7 +237,7 @@ if __name__ == '__main__':
     import random
     from kivy.app import App
     from kivy.uix.boxlayout import BoxLayout
-    from kivy.uix.button import Button
+    from flatbutton import FlatButton
     from kivy.clock import Clock
 
     class TestApp(App):
@@ -250,7 +250,7 @@ if __name__ == '__main__':
             root.add_widget(self.gauge)
 
             controls = BoxLayout(size_hint_y=None, height=dp(60), spacing=dp(10))
-            controls.add_widget(Button(
+            controls.add_widget(FlatButton(
                 text="Injecter mesure aléatoire",
                 on_press=lambda x: self.gauge.set_value(random.uniform(0, 50) * ureg.watt),
             ))

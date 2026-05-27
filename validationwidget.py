@@ -30,14 +30,14 @@ kv = '''
     thumb_width: '120dp'
     canvas.before:
         Color:
-            rgba: (0.5, 0.5, 0.5, 1-self.progress/0.9) if self.progress < 0.90 else (0.0, 0.0, 0.0, 1)
+            rgba: (0.2, 0.6, 0.8, (1-self.progress/0.9)*0.2) if self.progress < 0.90 else (0.0, 0.0, 0.0, 1)
         RoundedRectangle:
             pos: self.pos
             size: self.size
             radius: [dp(8)]
     canvas:
         Color:
-            rgba: (0.2, 0.4, 0.6, 1) if self.progress < 0.90 else (0.0, 0.0, 0.0, 0)
+            rgba: (0.2, 0.6, 0.8, 1) if self.progress < 0.90 else (0.0, 0.0, 0.0, 0)
         RoundedRectangle:
             pos: self.x + self.progress * (self.width - self.thumb_width), self.y
             size: self.thumb_width, self.height
@@ -54,13 +54,13 @@ kv = '''
 <ActionCircle>:
     canvas.before:
         Color:
-            rgba: (0.2, 0.4, 0.6, root.signal_alpha) if self.is_active else (0,0,0,0)
+            rgba: (0.2, 0.6, 0.8, root.signal_alpha) if self.is_active else (0,0,0,0)
         Line:
             circle: (self.center_x, self.center_y, root.signal_radius)
             width: dp(2)
-        
+
         Color:
-            rgba: (0.2, 0.4, 0.6, 1) if self.is_active else (0.8, 0.8, 0.8, 0.1)
+            rgba: (0.2, 0.6, 0.8, 1) if self.is_active else (0.2, 0.6, 0.8, 0.1)
         Ellipse:
             pos: self.center_x - min(self.width, self.height)*0.5, self.center_y - min(self.width, self.height) * 0.5
             size: min(self.width, self.height), min(self.width, self.height)

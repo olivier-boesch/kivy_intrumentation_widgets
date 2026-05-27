@@ -2,9 +2,8 @@ import pint
 from kivy.app import App
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
-from kivy.uix.togglebutton import ToggleButton
 from kivy.properties import StringProperty, ObjectProperty
+from flatbutton import FlatButton, FlatToggleButton
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.clock import Clock
@@ -12,6 +11,8 @@ from kivy.clock import Clock
 ureg = pint.UnitRegistry()
 
 kv = '''
+#:import FlatButton flatbutton
+#:import FlatToggleButton flatbutton
 <UnitNumberPopup>:
     title: self.title
     size_hint: 0.7, 0.7
@@ -32,7 +33,7 @@ kv = '''
             size_hint_y: 0.15
             canvas.before:
                 Color:
-                    rgba: 0.12, 0.12, 0.12, 1
+                    rgba: 0.05, 0.08, 0.12, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -48,50 +49,50 @@ kv = '''
                 spacing: dp(6)
                 size_hint_x: 0.5
 
-                Button:
+                FlatButton:
                     text: '7'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '8'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '9'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '⌫'
                     font_name: 'DejaVuSans'
                     on_release: root.press_key(self.text)
 
-                Button:
+                FlatButton:
                     text: '4'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '5'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '6'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: 'Del'
                     on_release: root.press_key(self.text)
 
-                Button:
+                FlatButton:
                     text: '1'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '2'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '3'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '-'
                     on_release: root.press_key(self.text)
 
-                Button:
+                FlatButton:
                     text: '0'
                     on_release: root.press_key(self.text)
-                Button:
+                FlatButton:
                     text: '.'
                     on_release: root.press_key(self.text)
                 Widget:
@@ -125,10 +126,10 @@ kv = '''
             orientation: 'horizontal'
             size_hint_y: 0.15
             spacing: dp(12)
-            Button:
+            FlatButton:
                 text: "Cancel"
                 on_release: root.dismiss()
-            Button:
+            FlatButton:
                 text: "Ok"
                 bold: True
                 on_release: root.validate()
@@ -137,11 +138,8 @@ kv = '''
 Builder.load_string(kv)
 
 
-class UnitButton(ToggleButton):
+class UnitButton(FlatToggleButton):
     unit_obj = ObjectProperty(None)
-
-    def on_width(self, instance, value):
-        self.text_size = value - dp(2), None
 
 
 class UnitNumberPopup(Popup):
@@ -213,7 +211,7 @@ class UnitNumberPopup(Popup):
         group = f'prefix_{id(self)}'
         selected_index = 0
         for i, (symbol, label) in enumerate(prefixes):
-            btn = ToggleButton(text=label, size_hint_y=None, height=dp(40), group=group)
+            btn = FlatToggleButton(text=label, size_hint_y=None, height=dp(40), group=group)
             if symbol == self.selected_prefix_str:
                 btn.state = 'down'
                 selected_index = i
@@ -325,7 +323,7 @@ if __name__ == '__main__':
     class TestApp(App):
         def build(self):
             layout = BoxLayout(padding=dp(50))
-            btn = Button(text="Ouvrir Popup", size_hint=(None, None), size=(dp(200), dp(50)))
+            btn = FlatButton(text="Ouvrir Popup", size_hint=(None, None), size=(dp(200), dp(50)))
             btn.bind(on_release=self.launch_popup)
             layout.add_widget(btn)
             return layout

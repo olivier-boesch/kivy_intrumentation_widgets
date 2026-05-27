@@ -17,8 +17,9 @@ from kivy.properties import ObjectProperty, NumericProperty, StringProperty, Lis
 from kivy.clock import Clock
 from kivy.metrics import dp
 from kivy.graphics import Color, Line, PushMatrix, PopMatrix, Rotate, InstructionGroup
+from kivy.uix.accordion import Animation
 
-from borderwrapper import BorderWrapper
+
 
 __all__ = ['RotaryEncoderWidget', 'BorderWrapper']
 
@@ -28,7 +29,7 @@ _TICK_ANGLES_RAD = [math.radians(i * 22.5) for i in range(16)]
 
 Builder.load_string("""
 <RotaryEncoderWidget>:
-    graphics_color: [0.2, 0.4, 0.8, 1]
+    graphics_color: [0.2, 0.6, 0.8, 1]
     text_color: [1, 1, 1, 1]
 
     BoxLayout:
@@ -71,10 +72,11 @@ Builder.load_string("""
         text: 'fin' if root.fine_mode else ''
         color: 1, 1, 1, 0.3
         font_size: min(root.height, root.width) * 0.05
-        size: dp(40), dp(20)
+        size: min(root.height, root.width) * 0.2, min(root.height, root.width) * 0.1
         center_x: root.center_x + min(root.height, root.width) * 0.25
         center_y: root.center_y
         halign: 'center'
+        valign: 'middle'
         text_size: self.size
 """)
 
@@ -119,7 +121,7 @@ class RotaryEncoderWidget(Widget):
     quantity_name = StringProperty("")
     granularity   = NumericProperty(2)
 
-    graphics_color = ListProperty([0.2, 0.4, 0.8, 1])
+    graphics_color = ListProperty([0.2, 0.6, 0.8, 1])
     text_color     = ListProperty([1, 1, 1, 1])
     fine_mode      = BooleanProperty(False)
 
@@ -178,8 +180,7 @@ class RotaryEncoderWidget(Widget):
 
     def _update_color(self, *_):
         self._color_instr.rgba = self.graphics_color
-        gc = self.graphics_color
-        self._boundary_color.rgba = [min(1, gc[0] + 0.3), min(1, gc[1] + 0.3), min(1, gc[2] + 0.3), 0.3]
+        self._boundary_color.rgba = [0.2, 0.6, 0.8, 0.2]
 
     def _rebuild_geometry(self, *_):
         cx, cy = self.center_x, self.center_y
@@ -201,8 +202,7 @@ class RotaryEncoderWidget(Widget):
                 width=tick_w,
             ))
 
-        gc = self.graphics_color
-        self._boundary_color.rgba = [min(1, gc[0] + 0.3), min(1, gc[1] + 0.3), min(1, gc[2] + 0.3), 0.3]
+        self._boundary_color.rgba = [0.2, 0.6, 0.8, 0.2]
         self._boundary_group.clear()
         self._boundary_group.add(Line(circle=(cx, cy, self._r_fine), width=dp(1.5)))
 
@@ -240,7 +240,7 @@ class RotaryEncoderWidget(Widget):
     def _trigger_cancel(self, touch):
         self._updating = True
         self.value = self._backup_value
-        self.rotation_angle = self._backup_rotation_angle
+        Animation(rotation_angle=self._backup_rotation_angle, t='linear', d=0.2).start(self)
         self._updating = False
         self.state = 'idle'
         self.text_color = [1, 1, 1, 1]
@@ -359,6 +359,7 @@ class RotaryEncoderWidget(Widget):
 
 if __name__ == '__main__':
     from kivy.app import App
+    from borderwrapper import BorderWrapper
 
     kv_app = """
 BoxLayout:

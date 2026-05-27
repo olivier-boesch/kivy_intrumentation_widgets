@@ -28,8 +28,8 @@ class BorderWrapper(BoxLayout):
     """
 
     title        = StringProperty("")
-    title_color  = ListProperty([0.95, 0.95, 0.95, 1])
-    border_color = ListProperty([1, 1, 1, 1])
+    title_color  = ListProperty([1, 1, 1, 1])
+    border_color = ListProperty([0.2, 0.6, 0.8, 0.4])
     border_width = NumericProperty(1.5)
     radius       = NumericProperty(8)
     title_texture = ObjectProperty(None, allownone=True)

@@ -28,9 +28,9 @@ class _FlatBase(Label):
         super().__init__(**kwargs)
         bc = self.button_color
         with self.canvas.before:
-            self._fill_color         = Color(bc[0], bc[1], bc[2], 0.15)
+            self._fill_color         = Color(bc[0], bc[1], bc[2], 0.3)
             self._fill_rect          = RoundedRectangle(pos=self.pos, size=self.size)
-            self._border_color_instr = Color(bc[0], bc[1], bc[2], 1.0)
+            self._border_color_instr = Color(*bc)
             self._border_line        = Line(width=dp(self.border_width))
         self._dp_r = dp(self.radius)
         self.bind(

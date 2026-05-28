@@ -180,7 +180,7 @@ class RotaryEncoderWidget(Widget):
 
     def _update_color(self, *_):
         self._color_instr.rgba = self.graphics_color
-        self._boundary_color.rgba = [0.2, 0.6, 0.8, 0.2]
+        self._boundary_color.rgba = self.graphics_color[:3] + [ 0.3]
 
     def _rebuild_geometry(self, *_):
         cx, cy = self.center_x, self.center_y

@@ -135,7 +135,7 @@ class CircularGauge(RelativeLayout):
 
         # Instructions canvas créées une fois, mises à jour in-place ensuite
         with self.canvas.before:
-            Color(0.2, 0.6, 0.8, 0.2)
+            Color(0.2, 0.6, 0.8, 0.3)
             self._bg_arc = Line(width=dp(8), cap='none')
             Color(0.2, 0.6, 0.8, 1)
             self._fg_arc = Line(width=dp(8), cap='none')

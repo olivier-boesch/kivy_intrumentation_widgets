@@ -30,7 +30,7 @@ kv = '''
     thumb_width: '120dp'
     canvas.before:
         Color:
-            rgba: (0.2, 0.6, 0.8, (1-self.progress/0.9)*0.2) if self.progress < 0.90 else (0.0, 0.0, 0.0, 1)
+            rgba: (0.2, 0.6, 0.8, (1-self.progress/0.9)*0.3) if self.progress < 0.90 else (0.0, 0.0, 0.0, 1)
         RoundedRectangle:
             pos: self.pos
             size: self.size

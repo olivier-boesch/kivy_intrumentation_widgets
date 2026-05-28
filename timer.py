@@ -13,7 +13,7 @@ KV = '''
     canvas.before:
         # Cercle d'arrière-plan (décor)
         Color:
-            rgba: 0.2, 0.6, 0.8, 0.2
+            rgba: 0.2, 0.6, 0.8, 0.3
         Line:
             circle: (self.width / 2, self.height / 2, min(self.width, self.height) / 2 - dp(15), 0, 360)
             width: dp(8)

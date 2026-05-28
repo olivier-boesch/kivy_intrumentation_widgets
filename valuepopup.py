@@ -33,10 +33,17 @@ kv = '''
             size_hint_y: 0.15
             canvas.before:
                 Color:
-                    rgba: 0.05, 0.08, 0.12, 1
+                    rgba: 0.2,0.6,0.8,0.3
                 Rectangle:
                     pos: self.pos
                     size: self.size
+                Color:
+                    rgba: 0.2,0.6,0.8,1
+                Line:
+                    rectangle: self.x, self.y, self.width, self.height
+                    width: dp(1.5)
+
+
 
         BoxLayout:
             orientation: 'horizontal'

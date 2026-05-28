@@ -82,13 +82,13 @@ class RollingChart(RelativeLayout):
         self._pts = [0.0] * (2 * x_window)
 
         with self.canvas.before:
-            Color(0.05, 0.08, 0.12, 1)
+            Color(0,0,0, 1)
             self._bg = Rectangle()
-            Color(0.2, 0.6, 0.8, 0.15)
+            Color(0.2, 0.6, 0.8, 1)
             self._grid_lines = []
             for _ in range(_N_Y_TICKS):
                 self._grid_lines.append(Line())
-            Color(0.2, 0.6, 0.8, 0.5)
+            Color(0.2, 0.6, 0.8, 1)
             self._axes = Line()
 
         with self.canvas:
